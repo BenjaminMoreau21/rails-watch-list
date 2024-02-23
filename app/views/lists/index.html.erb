@@ -2,6 +2,7 @@
   Create your movie lists
 </div>
 <div class="container">
+
   <div class="row d-flex">
     <% @lists.each do |list| %>
     <div class="col-lg-4 mt-4">
@@ -10,9 +11,10 @@
       url('<%= cl_image_path list.photo.key, height: 300, crop: :fill %>')">
           <h2><%= list.name %></h2>
       </div>
-      </div>
       <% end %>
-    </div>
+      </div>
     <% end %>
+  </div>
+
   </div>
 </div>
