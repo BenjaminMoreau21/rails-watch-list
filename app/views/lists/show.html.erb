@@ -1,4 +1,4 @@
-<div class="card-category d-flex" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+<div class="card-category d-flex banner-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
       url('<%= cl_image_path @list.photo.key, height: 300, crop: :fill %>')">
           <h2><%= @list.name %></h2>
       </div>
@@ -8,7 +8,42 @@
               list_path(@list.id),
               data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger mt-4"%>
 </div>
-<div class="mt-5 bg-white p-2" style="border-radius: 5px">
+
+    <div class="row mt-4">
+      <div class="col-lg-8">
+        <div class="row d-flex">
+        <% @list.bookmarks.each do |bookmark| %>
+        <div class="col-lg-6 mb-4">
+          <div class="card-trip d-flex flex-column">
+            <img src= <%=bookmark.movie.poster_url%> />
+            <div class="card-trip-infos">
+                <div class="d-flex align-items-center">
+                  <h2><%= bookmark.movie.title %></h2>
+                  <h3 class="ms-1 me-1"><%=bookmark.movie.rating%></h3>
+                  <h3><i class="fa-solid fa-star"></i></h3>
+                </div>
+                <div class="card-text">
+                <p><%= bookmark.movie.overview %></p>
+                </div>
+              <div class="d-flex align-items-center justify-content-between mt-3 mb-2">
+                <div class="d-flex align-items-center">
+                  <i class="fa-solid fa-quote-left me-1"></i>
+                  <p class="me-1"><%= bookmark.comment %></p>
+                </div>
+                <div>
+                  <%= link_to "Remove",
+                  bookmark_path(bookmark.id),
+                  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "link-danger"%>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="bg-white p-2" style="border-radius: 5px; ">
     <h4>Add a new film to the list</h4>
       <%= simple_form_for [@list, @bookmark] do |f| %>
         <%= f.association :movie %>
@@ -16,34 +51,38 @@
         <%= f.submit %>
       <% end %>
     </div>
-  <div class="row d-flex mt-4">
-      <% @list.bookmarks.each do |bookmark| %>
-      <div class="col-lg-4 mb-4">
-        <div class="card-trip d-flex flex-column">
-          <img src= <%=bookmark.movie.poster_url%> />
-          <div class="card-trip-infos">
-              <div class="d-flex align-items-center">
-                <h2><%= bookmark.movie.title %></h2>
-                <h3 class="ms-1 me-1"><%=bookmark.movie.rating%></h3>
-                <h3><i class="fa-solid fa-star"></i></h3>
+      </div>
+    </div>
+    <hr/>
+    <div class="row mt-5">
+      <div class="col-lg-6">
+        <div>
+          <h2>Reviews</h2>
+          <% @list.reviews.each do |review| %>
+            <div class="review">
+              <div class="d-flex">
+                <% review.rating.times do %>
+                  <i class="fa-solid fa-star"></i>
+                <% end %>
+                <% (5 - review.rating).times do %>
+                  <i class="fa-regular fa-star"></i>
+                <% end %>
               </div>
-              <div class="card-text">
-              <p><%= bookmark.movie.overview %></p>
-              </div>
-            <div class="d-flex align-items-center justify-content-between mt-3 mb-2">
-              <div class="d-flex align-items-center">
-                <i class="fa-solid fa-quote-left me-1"></i>
-                <p class="me-1"><%= bookmark.comment %></p>
-              </div>
-              <div>
-                <%= link_to "Remove",
-                bookmark_path(bookmark.id),
-                data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "link-danger"%>
-              </div>
+              <p><%= review.comment %></p>
             </div>
-          </div>
+            <hr/>
+          <% end %>
         </div>
       </div>
-      <% end %>
+      <div class="col-lg-6">
+        <div class="bg-white"  style="border-radius: 5px; padding: 10px">
+          <h4>Review that list</h4>
+          <%= simple_form_for [@list, @review] do |f| %>
+            <%= f.input :comment %>
+            <%= f.input :rating %>
+            <%= f.submit %>
+          <% end %>
+        </div>
+      </div>
     </div>
 </div>
