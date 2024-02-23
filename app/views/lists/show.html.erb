@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="col-lg-4">
-        <div class="bg-white p-2" style="border-radius: 5px; ">
+        <div class="bg-white p-2" style="border-radius: 5px; position: sticky; top: 76px ">
     <h4>Add a new film to the list</h4>
       <%= simple_form_for [@list, @bookmark] do |f| %>
         <%= f.association :movie %>

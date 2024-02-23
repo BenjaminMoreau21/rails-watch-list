@@ -10,8 +10,15 @@
   font-weight: bold;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  position: relative;
 }
 
 .banner-img {
   margin-top: 58px;
+}
+
+.delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
