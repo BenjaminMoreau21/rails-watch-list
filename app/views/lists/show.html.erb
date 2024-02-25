@@ -79,7 +79,7 @@
           <h4>Review that list</h4>
           <%= simple_form_for [@list, @review] do |f| %>
             <%= f.input :comment %>
-            <%= f.input :rating %>
+            <%= f.input :rating, collection: (1..5) %>
             <%= f.submit %>
           <% end %>
         </div>
