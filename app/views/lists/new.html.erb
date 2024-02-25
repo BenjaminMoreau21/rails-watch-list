@@ -1,7 +1,10 @@
-<div class="container banner-img">
-<%= simple_form_for(@list) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :photo, as: :file %>
-  <%= f.submit %>
-<% end %>
+<div class="container" style="margin-top: 100px">
+  <div class="bg-white classic-form">
+    <h4>Review that list</h4>
+    <%= simple_form_for(@list) do |f| %>
+      <%= f.input :name %>
+      <%= f.input :photo, as: :file %>
+      <%= f.submit %>
+    <% end %>
+  </div>
 </div>
