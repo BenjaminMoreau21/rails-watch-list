@@ -67,11 +67,12 @@
             <div class="review">
               <div class="d-flex">
                 <% review.rating.times do %>
-                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star me-2"></i>
                 <% end %>
                 <% (5 - review.rating).times do %>
-                  <i class="fa-regular fa-star"></i>
+                  <i class="fa-regular fa-star me-2"></i>
                 <% end %>
+                <p style="color: gray;">Published <%= time_ago_in_words(review.created_at) %> ago</p>
               </div>
               <p><%= review.comment %></p>
             </div>
