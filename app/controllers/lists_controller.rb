@@ -9,6 +9,8 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
     @bookmark = Bookmark.new
     @review = Review.new
+    @avg_rating = @list.reviews.map(&:rating).sum.to_f / @list.reviews.size
+    @display_avg_rating = @list.reviews.empty? ? '' : @avg_rating.floor(2)
   end
 
   def new
